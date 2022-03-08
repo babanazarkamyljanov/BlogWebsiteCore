@@ -1,0 +1,36 @@
+﻿.custom-form {
+    background-color: #2c3e50;
+    min-height: 400px;
+    width: 700px;
+}
+
+.card {
+    margin: 15px 15px 15px 15px;
+    background-color: #2c3e50;
+}
+
+.form-check-input {
+}
+
+.form-check-label {
+    margin-right: 70%;
+}
+
+.card-header {
+    margin-top: 20px;
+}
+
+.btn-primary {
+    margin-right: 70%;
+    width: auto;
+}
+
+@media(max-width: 850px) {
+    .custom-form {
+        width: 300px;
+    }
+
+    .btn-primary {
+        margin-right: 40px;
+    }
+}

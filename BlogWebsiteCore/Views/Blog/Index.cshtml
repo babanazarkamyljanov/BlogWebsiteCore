@@ -1,0 +1,167 @@
+﻿@model IEnumerable<BlogWebsiteCore.Models.Blog>
+@using System.IO
+@using System.Text
+@using System.Web
+@using System.Text.RegularExpressions
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>Blogs</title>
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+        #blog-page-id {
+            font-family: 'Roboto', sans-serif;
+            background-color: #1abc9c;
+            /*background: #7f7fd5;
+            background: linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5);*/
+        }
+        .create_sort_btns {
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            margin-block: 10px;
+            gap: 10px;
+        }
+
+        .custom-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin-block: 2rem;
+            gap: 2rem;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        .custom-card {
+            display: flex;
+            flex-direction: column;
+            /*width: clamp(20rem, calc(20rem + 2vw), 22rem);*/
+            width: 340px;
+            overflow: hidden;
+            box-shadow: 0 .1rem 1rem rgba(0, 0, 0, 0.1);
+            border-radius: 1em;
+            background: #ECE9E6;
+            background: linear-gradient(to right, #FFFFFF, #ECE9E6);
+        }
+        @@media (max-width: 500px) {
+            .custom-container {
+                flex-direction: column;
+            }
+        }
+        .custom-card-header img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .custom-card-body {
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: .5rem;
+        }
+        .tag {
+            align-self: flex-start;
+            padding: .25em .75em;
+            border-radius: 1em;
+            font-size: .75rem;
+        }
+        .tag + .tag {
+            margin-left: .5em;
+        }
+        .tag-blue {
+            background: #56CCF2;
+            background: linear-gradient(to bottom, #2F80ED, #56CCF2);
+            color: #fafafa;
+        }
+        .custom-card-body h4 {
+            font-size: 1.5rem;
+            text-transform: capitalize;
+        }
+        .custom-card-footer {
+            display: flex;
+            flex-direction: column;
+            gap: 1.0rem;
+            padding: 1rem;
+            margin-top: auto;
+        }
+        .user {
+            display: flex;
+            gap: .5rem;
+        }
+        .user-image {
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+        }
+        .user-info > small {
+            color: #666;
+        }
+    </style>
+</head>
+<body id="blog-page-id">
+    <h1>Blogs</h1>
+    <div class="create_sort_btns">
+        <a class="btn btn-secondary" asp-action="Create">Create Blog</a>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">SORT BY</button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" asp-action="Index" asp-route-sortOrder="@ViewBag.DateOldestSortParm">Date added(oldest)</a>
+                <a class="dropdown-item" asp-action="Index" asp-route-sortOrder="@ViewBag.DateNewestSortParm">Date added(newest)</a>
+            </div>
+        </div>
+    </div>
+    <div class="custom-container">
+        @foreach (var item in Model)
+        {
+            <div class="custom-card">
+                <div class="custom-card-header">
+                    <img src="@("~/Image/" + item.Image)" asp-append-version="true" alt="custom-card-image" class="custom-card-image" width="600" />
+                </div>
+
+                <div class="custom-card-body">
+                    <span class="tag tag-blue">@item.Category</span>
+                    <h4 style="color: #2c3e50;">@item.BlogName</h4>
+                    <p style="color: black;">
+                        @{
+                            var text = item.Content.Replace("&nbsp;",string.Empty);
+                            text = Regex.Replace(text,"<.*?>", string.Empty);
+
+                            if (text.Length > 100)
+                                text = text.Substring(0, 100);
+                        }
+                        @text ...
+                    </p>
+                </div>
+
+                <div class="custom-card-footer">
+                    <a class="btn btn-primary" asp-action="Details" asp-controller="Blog" asp-route-id="@item.BlogId">Read More</a>
+                    <div class="user">
+                        <img src="~/user_img/thomas.jpg" alt="user-image" class="user-image" />
+                        <div class="user-info">
+                            <h5 style="color: #2c3e50;">Thomas Thomas</h5>
+                            <small>@item.CreatedDate</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</body>
+</html>

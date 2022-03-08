@@ -1,0 +1,30 @@
+﻿@model BlogWebsiteCore.Models.Blog
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete</title>
+    <link href="~/css/BlogDetailsDelete.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="all-details">
+        <h3 style="margin-top: 15px;">Are you sure you want to delete this?</h3>
+        <img class="card-img-top" src="@("~/Image/" + Model.Image)" asp-append-version="true" />
+        <h1>@Model.BlogName</h1>
+        <h2>@Model.Category</h2>
+        <div class="box-maintext">
+            <p class="main-text">
+                @Html.Raw(Model.Content)
+            </p>
+        </div>
+        <p class="time">
+            @Model.CreatedDate.ToString("dd MMMM yyyy")
+        </p>
+        <form style="margin-bottom: 20px;" asp-action="Delete">
+            <input type="hidden" asp-for="BlogId" />
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            <a asp-action="Index">Back to List</a>
+        </form>
+    </div>
+</body>
+</html>

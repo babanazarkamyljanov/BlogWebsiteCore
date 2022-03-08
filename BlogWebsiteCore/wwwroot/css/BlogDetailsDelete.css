@@ -1,0 +1,120 @@
+﻿.all-details {
+    background: #2c3e50;
+    width: 800px;
+    height: 100%;
+}
+
+.card-img-top {
+    height: 400px;
+    width: 400px;
+    margin-top: 10px;
+}
+
+.box-maintext {
+    width: 780px;
+}
+
+.main-text {
+    margin: 50px 100px 50px 100px;
+}
+
+.time {
+    margin-left: 60%;
+}
+
+.edit-btn {
+    margin-left: 67%;
+}
+
+.count-comments {
+    font-size: 16px;
+    color: pink;
+    margin-right: 68%;
+}
+
+.comment-label {
+    width: 630px;
+    margin-left: 70px;
+}
+
+.com-btn {
+    margin-left: 58%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.custom-container {
+    width: 630px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 70px;
+    margin-bottom: 20px;
+    border: 1px solid;
+    border-color: white;
+}
+
+.custom-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+.user-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: peachpuff;
+}
+
+.user-icon-text {
+    margin: 5px 5px 5px 5px;
+    font-size: 20px;
+    color: blue;
+    text-align: center;
+    font-weight: 900;
+    padding: 10px;
+}
+
+.comment-author {
+    font-size: 20px;
+}
+
+.comment {
+    font-size: 18px;
+    margin-left: 20px;
+    color: pink;
+}
+
+@media (max-width: 850px) {
+    .all-details {
+        width: 500px;
+    }
+
+    .box-maintext {
+        width: 470px;
+    }
+
+    .time {
+        margin-left: 40%
+    }
+
+    .count-comments {
+        margin-right: 56%;
+    }
+
+    .comment-label {
+        width: 400px;
+        margin-left: 10%;
+    }
+
+    .com-btn {
+        margin-left: 54%;
+    }
+
+    .custom-container {
+        width: 400px;
+        margin-left: 10%;
+    }
+}

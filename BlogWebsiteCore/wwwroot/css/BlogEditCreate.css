@@ -1,0 +1,14 @@
+﻿.col-md-8 {
+    background: #2c3e50;
+    width: 800px;
+}
+
+@media (max-width: 850px) {
+    .col-md-8 {
+        width: 500px;
+    }
+}
+
+.form-group {
+    margin: 15px;
+}

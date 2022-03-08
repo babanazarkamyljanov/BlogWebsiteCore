@@ -1,0 +1,37 @@
+﻿.custom-form {
+    background: #2c3e50;
+    width: 500px;
+    height: 400px;
+}
+
+.custom-row {
+    display: flex;
+    gap: 30px;
+}
+
+.custom-label {
+    width: 50px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.custom-col {
+    margin-top: 10px;
+}
+
+.custom-form-control {
+    width: 400px;
+}
+
+.btns {
+    margin-left: 300px;
+    margin-bottom: 15px;
+}
+
+.btn-primary {
+    margin-right: 10px;
+}
+
+.card {
+    background-color: #2c3e50;
+}

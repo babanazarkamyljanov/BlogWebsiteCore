@@ -1,0 +1,28 @@
+﻿.col-md-4 {
+    background: #2c3e50;
+    width: 600px;
+}
+
+.form-group {
+    width: 300px;
+    margin-left: 150px;
+    padding: 10px;
+}
+
+.mybtn {
+    width: 125px;
+    margin: 30px 0 0 0;
+    font-weight: 900;
+    font-size: 24px;
+}
+
+@media (max-width: 850px) {
+    .col-md-4 {
+        width: 400px;
+    }
+
+    .form-group {
+        width: 200px;
+        margin-left: 100px;
+    }
+}

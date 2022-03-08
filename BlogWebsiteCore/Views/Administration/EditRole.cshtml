@@ -1,0 +1,57 @@
+﻿@model EditRoleViewModel
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Role</title>
+    <link href="~/css/EditRole.css" rel="stylesheet"/>
+</head>
+<body>
+    <h1>Edit Role</h1>
+    <form method="post" class="custom-form">
+        <div class="custom-row">
+            <label asp-for="Id" class="custom-label"></label>
+            <div class="custom-col">
+                <input asp-for="Id" disabled class="custom-form-control" />
+            </div>
+        </div>
+        <div class="custom-row">
+            <label asp-for="RoleName" class="custom-label"></label>
+            <div class="custom-col">
+                <input asp-for="RoleName" class="custom-form-control" />
+                <span asp-validation-for="RoleName" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="custom-row btns">
+            <div class="custom-col">
+                <button type="submit" class="btn btn-primary">Update</button>
+                <a asp-action="ListRoles" class="btn btn-primary">Cancel</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Users in this role</h3>
+            </div>
+            <div class="card-body">
+                @if (Model.Users.Any())
+                {
+                    foreach (var user in Model.Users)
+                    {
+                        <h5 class="card-title">@user</h5>
+                    }
+                }
+                else
+                {
+                    <h5 class="card-title">None at the moment</h5>
+                }
+            </div>
+            <div class="card-footer">
+                <a asp-action="EditUsersInRole" asp-controller="Administration" asp-route-roleId="@Model.Id" class="btn btn-primary" style="width: auto;">Add or Remove users</a>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

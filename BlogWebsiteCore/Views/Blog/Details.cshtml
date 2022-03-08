@@ -1,0 +1,89 @@
+﻿@model BlogWebsiteCore.ViewModels.BlogCommentViewModel
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@using System
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Details</title>
+    <link href="~/css/BlogDetailsDelete.css" rel="stylesheet"/>
+</head>
+<body>
+    <div class="all-details">
+        <img class="card-img-top" src="@("~/Image/" + Model.Blog.Image)" asp-append-version="true" />
+        <h1>@Model.Blog.BlogName</h1>
+        <h2>@Model.Blog.Category</h2>
+        <div class="box-maintext">
+            <p class="main-text">
+                @Html.Raw(Model.Blog.Content)
+            </p>
+        </div>
+        <p class="time">
+            @Model.Blog.CreatedDate.ToString("dd MMMM yyyy")
+        </p>
+
+        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+        {
+            <p class="edit-btn">
+                <a asp-action="Edit" asp-controller="Blog" asp-route-id="@Model.Blog.BlogId" class="btn btn-primary">Edit</a>
+            </p>
+        }
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <h3 class="count-comments">
+                    @{
+                        string str = null;
+                    }
+                    @if (Model.Blog.CountOfComments == 0)
+                    {
+                        str = "No Comments";
+                    }
+                    else if (Model.Blog.CountOfComments == 1)
+                    {
+                        str = "1 Comment";
+                    }
+                    else if (Model.Blog.CountOfComments > 1)
+                    {
+                        str = Model.Blog.CountOfComments.ToString() + " Comments";
+                    }
+                    @str
+                </h3>
+                <input asp-for="Comment.Message" class="form-control comment-label" />
+                <span asp-validation-for="Comment.Message" class="text-danger"></span>
+                <input type="submit" value="Add Comment" class="btn btn-primary com-btn" />
+            </div>
+        }
+
+        @for (int i = Model.Comments.Count() - 1; i >= 0; i--)
+        {
+            <div class="custom-container">
+                <div class="custom-row">
+                    @{
+                        var author = await UserManager.FindByIdAsync(Model.Comments[i].AuthorId);
+                    }
+                    <div class="user-icon">
+                        <h1 class="user-icon-text">
+                            @author.FirstName[0]
+                        </h1>
+                    </div>
+                    <div>
+                        <h1 class="comment-author">@author.FirstName</h1>
+                        <small>@Model.Comments[i].CreatedDate.ToString("MM/dd/yyyy hh:mm tt")</small>
+                    </div>
+                </div>
+                <div class="custom-row">
+                    <label class="comment">
+                        @Html.DisplayFor(model => Model.Comments[i].Message)
+                    </label>
+                </div>
+            </div>
+        }
+    </div>
+</body>
+</html>
